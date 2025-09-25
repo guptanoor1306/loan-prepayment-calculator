@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Prepayment Calculator - Tricks To Pay Your Loan Faster</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Zerodha Header -->
+        <div class="zerodha-header">
+            <div class="zerodha-brand">
+                <div class="brand-logo">Z</div>
+                <span class="brand-text">Zero1 by Zerodha</span>
+                <span class="brand-tagline">Smart Financial Tools</span>
+            </div>
+        </div>
+
+        <header>
+            <div class="header-icon">💰</div>
+            <h1>Tricks To Pay Your Loan Faster</h1>
+            <p class="subtitle">Smart Prepayment Calculator</p>
+            <div class="header-divider"></div>
+        </header>
+
+        <!-- Main Input Section -->
+        <div class="calculator-card">
+            <form id="loanForm" class="input-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="principal">Principal (₹)</label>
+                        <input type="number" id="principal" name="principal" placeholder="Enter loan amount" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="interestRate">Annual Interest Rate (%)</label>
+                        <input type="number" id="interestRate" name="interestRate" placeholder="Enter rate" step="0.01" min="0" max="100" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="tenure">Tenure (months)</label>
+                        <input type="number" id="tenure" name="tenure" placeholder="Enter tenure" min="1" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="calculate-btn">Calculate Base EMI & Show Strategies</button>
+            </form>
+
+            <!-- Base EMI Result -->
+            <div id="results" class="results-section" style="display: none;">
+                <div class="base-emi-result">
+                    <h3>Your Base EMI</h3>
+                    <div class="emi-display">
+                        <span id="baseEMI" class="emi-value">₹0</span>
+                        <span class="emi-label">per month</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategy Comparison Summary -->
+        <div id="strategyComparison" class="comparison-summary" style="display: none;">
+            <h3>📊 Strategy Comparison</h3>
+            <div class="comparison-cards">
+                <div class="comparison-card-mini baseline">
+                    <div class="card-header">Original Loan</div>
+                    <div class="card-value" id="originalSummary">₹0 interest</div>
+                    <div class="card-tenure" id="originalTenure">240 months</div>
+                </div>
+                <div class="comparison-card-mini" data-strategy="extra-emi">
+                    <div class="card-header">1 EMI Extra/Year</div>
+                    <div class="card-value" id="extraEmiSummary">Calculate to see</div>
+                    <div class="card-tenure" id="extraEmiTenure">- months saved</div>
+                </div>
+                <div class="comparison-card-mini" data-strategy="step-up">
+                    <div class="card-header">EMI Step-up</div>
+                    <div class="card-value" id="stepUpSummary">Calculate to see</div>
+                    <div class="card-tenure" id="stepUpTenureSummary">- months saved</div>
+                </div>
+                <div class="comparison-card-mini" data-strategy="lump-sum">
+                    <div class="card-header">Lump-sum Payments</div>
+                    <div class="card-value" id="lumpSumSummary">Calculate to see</div>
+                    <div class="card-tenure" id="lumpSumTenureSummary">- months saved</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategy Tabs -->
+        <div id="strategyTabs" class="strategy-tabs" style="display: none;">
+            <div class="tab-headers">
+                <button class="tab-header active" data-tab="strategyA">
+                    <span class="tab-icon">📈</span>
+                    <div class="tab-info">
+                        <span class="tab-title">Strategy A</span>
+                        <span class="tab-subtitle">1 EMI Extra/Year</span>
+                    </div>
+                </button>
+                <button class="tab-header" data-tab="strategyB">
+                    <span class="tab-icon">📊</span>
+                    <div class="tab-info">
+                        <span class="tab-title">Strategy B</span>
+                        <span class="tab-subtitle">EMI Step-up</span>
+                    </div>
+                </button>
+                <button class="tab-header" data-tab="strategyC">
+                    <span class="tab-icon">💎</span>
+                    <div class="tab-info">
+                        <span class="tab-title">Strategy C</span>
+                        <span class="tab-subtitle">Lump-sum Payments</span>
+                    </div>
+                </button>
+            </div>
+
+            <!-- Strategy A Content -->
+            <div id="strategyA" class="tab-content active">
+                <div class="strategy-description">
+                    Make one additional EMI payment each year to reduce loan tenure significantly.
+                </div>
+                
+                <div class="strategy-controls">
+                    <div class="control-group-inline">
+                        <label for="extraPaymentMonth">Extra Payment Month:</label>
+                        <select id="extraPaymentMonth" class="control-input">
+                            <option value="12">December</option>
+                            <option value="3">March</option>
+                            <option value="6">June</option>
+                            <option value="9">September</option>
+                        </select>
+                        <button id="calculateStrategy2" class="strategy-btn">Calculate</button>
+                    </div>
+                </div>
+
+                <div id="strategy2Results" class="strategy-results" style="display: none;">
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <span class="result-label">Interest Saved:</span>
+                            <span id="interestSaved" class="result-value">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Tenure Reduced:</span>
+                            <span id="tenureReduced" class="result-value">0 months</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-section">
+                        <div class="table-controls">
+                            <button id="showFirst12" class="table-control-btn active">First 12 Months</button>
+                            <button id="showAll" class="table-control-btn">View All</button>
+                            <button id="exportTable" class="table-control-btn">Export CSV</button>
+                        </div>
+                        <div class="table-wrapper">
+                            <table id="amortizationTable" class="amortization-table">
+                                <thead>
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Opening Balance</th>
+                                        <th>EMI</th>
+                                        <th>Interest</th>
+                                        <th>Principal</th>
+                                        <th>Extra</th>
+                                        <th>Closing Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="amortizationBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategy B Content -->
+            <div id="strategyB" class="tab-content">
+                <div class="strategy-description">
+                    Gradually increase your EMI by a fixed percentage each year as your income grows.
+                </div>
+                
+                <div class="strategy-controls">
+                    <div class="control-group-inline">
+                        <label for="stepUpPercentage">Annual Step-up %:</label>
+                        <input type="number" id="stepUpPercentage" class="control-input" value="5" step="0.1" min="0" max="50">
+                        <label for="stepUpStartYear">Start Year:</label>
+                        <select id="stepUpStartYear" class="control-input">
+                            <option value="2">Year 2</option>
+                            <option value="1">Year 1</option>
+                            <option value="3">Year 3</option>
+                        </select>
+                        <button id="calculateStrategy3" class="strategy-btn">Calculate</button>
+                    </div>
+                </div>
+
+                <div id="strategy3Results" class="strategy-results" style="display: none;">
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <span class="result-label">Interest Saved:</span>
+                            <span id="stepUpInterestSaved" class="result-value">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Tenure Reduced:</span>
+                            <span id="stepUpTenureReduced" class="result-value">0 months</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Final EMI:</span>
+                            <span id="finalEMIAmount" class="result-value">₹0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-section">
+                        <div class="table-controls">
+                            <button id="showFirst12Step" class="table-control-btn active">First 12 Months</button>
+                            <button id="showFirst24Step" class="table-control-btn">First 24 Months</button>
+                            <button id="showAllStep" class="table-control-btn">View All</button>
+                        </div>
+                        <div class="table-wrapper">
+                            <table id="stepUpAmortizationTable" class="amortization-table">
+                                <thead>
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Year</th>
+                                        <th>Opening Balance</th>
+                                        <th>EMI</th>
+                                        <th>Interest</th>
+                                        <th>Principal</th>
+                                        <th>Closing Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="stepUpAmortizationBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Strategy C Content -->
+            <div id="strategyC" class="tab-content">
+                <div class="strategy-description">
+                    Make irregular lump-sum payments when you have extra funds like bonuses or windfalls.
+                </div>
+                
+                <div class="lumpsum-builder">
+                    <div class="lumpsum-input">
+                        <input type="number" id="lumpsumMonth" class="control-input" placeholder="Month" min="1" value="6">
+                        <input type="number" id="lumpsumAmount" class="control-input" placeholder="Amount (₹)" step="1000" min="1000" value="100000">
+                        <button id="addLumpsum" class="add-btn">Add Payment</button>
+                    </div>
+                    <div class="quick-add-buttons">
+                        <button class="quick-add-btn" data-amount="50000">+₹50K</button>
+                        <button class="quick-add-btn" data-amount="100000">+₹1L</button>
+                        <button class="quick-add-btn" data-amount="200000">+₹2L</button>
+                        <button class="quick-add-btn" data-amount="500000">+₹5L</button>
+                    </div>
+                    
+                    <div id="lumpsumList" class="lumpsum-list">
+                        <div id="lumpsumItems" class="lumpsum-items"></div>
+                    </div>
+                    
+                    <button id="calculateStrategy4" class="strategy-btn">Calculate with Lump-sum Payments</button>
+                </div>
+
+                <div id="strategy4Results" class="strategy-results" style="display: none;">
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <span class="result-label">Interest Saved:</span>
+                            <span id="lumpsumInterestSaved" class="result-value">₹0</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">Tenure Reduced:</span>
+                            <span id="lumpsumTenureReduced" class="result-value">0 months</span>
+                        </div>
+                        <div class="result-item">
+                            <span class="result-label">ROI on Prepayments:</span>
+                            <span id="prepaymentROI" class="result-value">0%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="table-section">
+                        <div class="table-controls">
+                            <button id="showFirst12Lump" class="table-control-btn active">First 12 Months</button>
+                            <button id="showPaymentMonths" class="table-control-btn">Payment Months</button>
+                            <button id="showAllLump" class="table-control-btn">View All</button>
+                        </div>
+                        <div class="table-wrapper">
+                            <table id="lumpsumAmortizationTable" class="amortization-table">
+                                <thead>
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Opening Balance</th>
+                                        <th>EMI</th>
+                                        <th>Interest</th>
+                                        <th>Principal</th>
+                                        <th>Extra</th>
+                                        <th>Closing Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lumpsumAmortizationBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Final Recommendation -->
+        <div id="finalRecommendation" class="recommendation-section" style="display: none;">
+            <h3>🎯 Our Recommendation</h3>
+            <div id="recommendationContent" class="recommendation-content">
+                Calculate strategies to see personalized recommendations.
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
