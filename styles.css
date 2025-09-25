@@ -1,4 +1,4 @@
-/* Black Theme Simplified Calculator - Roboto Font */
+/* Purple Theme Zero1 Calculator - Roboto Font */
 * {
     margin: 0;
     padding: 0;
@@ -108,12 +108,13 @@ header h1 {
 
 /* Calculator Card */
 .calculator-card {
-    background: #1a1a1a;
+    background: rgba(26, 26, 46, 0.9);
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     padding: 30px;
     margin-bottom: 25px;
-    border: 1px solid #333;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    backdrop-filter: blur(20px);
 }
 
 /* Form Styling */
@@ -149,20 +150,20 @@ header h1 {
 
 .form-group input, .form-group select {
     padding: 12px 16px;
-    border: 2px solid #333;
+    border: 2px solid rgba(102, 126, 234, 0.3);
     border-radius: 8px;
     font-size: 1rem;
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     transition: all 0.3s ease;
-    background: #000;
+    background: rgba(15, 15, 35, 0.8);
     color: #e4e6ea;
 }
 
 .form-group input:focus, .form-group select:focus {
     outline: none;
-    border-color: #387ed1;
-    box-shadow: 0 0 0 3px rgba(56, 126, 209, 0.15);
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.15);
 }
 
 .calculate-btn {
@@ -241,11 +242,13 @@ header h1 {
 
 /* Strategy Comparison Summary */
 .comparison-summary {
-    background: #1a1a1a;
+    background: rgba(26, 26, 46, 0.9);
     border-radius: 16px;
     padding: 25px;
     margin-bottom: 25px;
-    border: 1px solid #333;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .comparison-summary h3 {
@@ -313,18 +316,20 @@ header h1 {
 
 /* Strategy Tabs */
 .strategy-tabs {
-    background: #1a1a1a;
+    background: rgba(26, 26, 46, 0.9);
     border-radius: 16px;
     padding: 0;
     margin-bottom: 25px;
-    border: 1px solid #333;
+    border: 1px solid rgba(102, 126, 234, 0.2);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     overflow: hidden;
 }
 
 .tab-headers {
     display: flex;
-    background: #111;
-    border-bottom: 1px solid #333;
+    background: rgba(15, 15, 35, 0.8);
+    border-bottom: 1px solid rgba(102, 126, 234, 0.3);
 }
 
 .tab-header {
@@ -334,7 +339,7 @@ header h1 {
     padding: 20px 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-right: 1px solid #333;
+    border-right: 1px solid rgba(102, 126, 234, 0.3);
     display: flex;
     align-items: center;
     gap: 12px;
@@ -346,13 +351,13 @@ header h1 {
 }
 
 .tab-header.active {
-    background: #1a1a1a;
-    color: #4fb3d9;
-    border-bottom: 2px solid #4fb3d9;
+    background: rgba(26, 26, 46, 0.9);
+    color: #667eea;
+    border-bottom: 2px solid #667eea;
 }
 
 .tab-header:hover:not(.active) {
-    background: #222;
+    background: rgba(102, 126, 234, 0.1);
     color: #a0a3bd;
 }
 
