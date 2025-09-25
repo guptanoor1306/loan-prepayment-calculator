@@ -12,16 +12,18 @@ class Analytics {
             ...properties
         };
         
-        // Store in localStorage for now (can be sent to analytics service)
+        // Store in localStorage for debugging
         const existingData = JSON.parse(localStorage.getItem('loanCalculatorAnalytics') || '[]');
         existingData.push(analyticsData);
         localStorage.setItem('loanCalculatorAnalytics', JSON.stringify(existingData));
         
+        // Send to Vercel Analytics
+        if (typeof window.va === 'function') {
+            window.va('track', event, properties);
+        }
+        
         // Console log for development
         console.log('Analytics:', analyticsData);
-        
-        // Here you can add code to send to your analytics service
-        // Example: fetch('/api/analytics', { method: 'POST', body: JSON.stringify(analyticsData) })
     }
     
     static getAnalytics() {
