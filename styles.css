@@ -37,6 +37,27 @@ body {
     justify-content: center;
 }
 
+/* SVG Logo Styles */
+.brand-logo-svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+.brand-logo-svg:hover {
+    transform: scale(1.05);
+}
+
+.brand-logo-svg svg {
+    transition: all 0.3s ease;
+}
+
+.brand-logo-svg:hover svg circle:first-of-type {
+    fill: url(#logoGradientHover);
+}
+
+/* Fallback text logo */
 .brand-logo {
     width: 40px;
     height: 40px;
@@ -816,6 +837,15 @@ header h1 {
         flex-direction: row;
         align-items: center;
         gap: 12px;
+    }
+
+    .brand-logo-svg {
+        flex-shrink: 0;
+    }
+    
+    .brand-logo-svg svg {
+        width: 36px;
+        height: 36px;
     }
 
     .brand-logo {
