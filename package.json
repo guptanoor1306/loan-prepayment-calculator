@@ -1,23 +1,6 @@
 {
   "name": "loan-prepayment-calculator",
   "version": "1.0.0",
-  "description": "Zero1 by Zerodha - Smart Loan Prepayment Calculator",
-  "main": "index.html",
-  "scripts": {
-    "start": "serve .",
-    "build": "echo 'No build step required for static site'"
-  },
-  "keywords": [
-    "loan",
-    "calculator",
-    "prepayment",
-    "zerodha",
-    "zero1",
-    "emi"
-  ],
-  "author": "Zero1 by Zerodha",
-  "license": "MIT",
-  "devDependencies": {
-    "serve": "^14.2.0"
-  }
+  "description": "Zero1 by Zerodha - Smart loan prepayment calculator",
+  "main": "index.html"
 }
