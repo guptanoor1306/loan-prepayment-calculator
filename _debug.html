@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test - CSS Loading</title>
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .test-card {
+            background: rgba(26, 26, 46, 0.9);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 600px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+        }
+        .test-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-card">
+        <h1>🧪 CSS Test</h1>
+        <p>If you can see this styled correctly with purple background, CSS is working!</p>
+        <button class="test-button">Test Button</button>
+        <br><br>
+        <a href="index.html" style="color: #667eea;">Go to Main Calculator</a>
+    </div>
+    
+    <script>
+        console.log('JavaScript is working!');
+        document.querySelector('.test-button').addEventListener('click', function() {
+            alert('JavaScript and CSS are both working!');
+        });
+    </script>
+</body>
+</html>
